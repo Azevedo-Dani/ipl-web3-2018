@@ -5,18 +5,26 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
-
 const assetPath = require('./asset_path.js');
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
+const client = require('./bd/bd')
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
 
 const app = express();
 
 app.locals.assetPath = assetPath;
+client.connect().then(async (db) => {
+  client.countUsers(db).then(count => {
+    if(count === 0) {
+      client.insertUser(db, 'Rocha', 'Dani')
+    } else {
+      console.log(count)
+    }
+  })
+})
+// replace the uri string with your connection string.
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
