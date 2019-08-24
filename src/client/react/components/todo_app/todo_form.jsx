@@ -1,6 +1,6 @@
 import React from "react";
-import Form from 'react-bootstrap/lib/Form';
-import Button from 'react-bootstrap/lib/Button';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const TodoForm = ({
   handleSubmit,

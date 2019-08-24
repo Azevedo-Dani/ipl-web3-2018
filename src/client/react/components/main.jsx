@@ -1,11 +1,11 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, BrowserRouter } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Navigation from "./navigation/navigation";
 import HelloWorld from "./hello_world/hello_world";
 import HelloFromParams from "./hello_world/hello_from_params";
 import TodoAppContainer from "./todo_app/todo_app_container";
-
+import MessagesContainer from './message/messages_container'
 class Main extends React.Component {
   constructor(props){
     super(props);
@@ -47,6 +47,7 @@ class Main extends React.Component {
                 <Route exact path="/" render={() => <HelloWorld name={this.state.name} />} />
                 <Route path="/hello/:name" component={HelloFromParams} />
                 <Route path="/todo" component={TodoAppContainer} />
+                <Route path="/messages" component={MessagesContainer}/>
               </Col>
               <Col xs={2} />
             </Row>
