@@ -6,3 +6,10 @@ body {
 h1 {
     color: green;
 }
+.hour {
+    color: blue;
+}
+
+ul.topics {
+    list-style-type: none;
+}
