@@ -14,11 +14,6 @@ fetch("/users/current")
         document.body.querySelector("h1").appendChild(helloElem);
     })
 
-var imageElem = document.createElement('img');
-imageElem.setAttribute('src', image);
-
-document.body.appendChild(imageElem);
-
 // react
 const rootElem = document.body.querySelector('#root');
 const reactMainElem = React.createElement(ReactMain, {});
