@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/server/bin/www",
   "private": true,
+  "engines": {
+    "node": "10.3.0"
+  },
   "scripts": {
     "start": "node src/server/bin/www",
     "build": "webpack --mode production --config config/webpack.config.js",
