@@ -2,19 +2,28 @@ import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Navigation from "./navigation/navigation";
+import AutheticatedRoute from './authenticatedRoute/authenticateRouteContainer'
 import HelloWorld from "./hello_world/hello_world";
 import HelloFromParams from "./hello_world/hello_from_params";
 import TodoAppContainer from "./todo_app/todo_app_container";
 import MessagesContainer from "./messages/messages_container";
 import MessageContainer from "./message/message_container";
 import LoginContainer from "./login/login_container";
-import LogoutContainer from './login/logout_container'
 class Main extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      name: "..."
+      name: "...",
+      authenticate: localStorage.getItem('JWT') ? true : false
     }
+    this.setJwt = this.setJwt.bind(this)
+  }
+
+  setJwt(jwt) {
+    this.setState({
+      authenticate: true
+    })
+    localStorage.setItem('JWT', JSON.stringify(jwt))
   }
 
   updateNameFromWebservice(){
@@ -47,13 +56,14 @@ class Main extends React.Component {
             <Row>
               <Col xs={2} />
               <Col xs={8}>
-                <Route exact path="/" render={() => <HelloWorld name={this.state.name} />} />
-                <Route path="/hello/:name" component={HelloFromParams} />
-                <Route path="/todo" component={TodoAppContainer} />
-                <Route path="/messages" component={MessagesContainer} />
-                <Route path="/message/:id" component={MessageContainer} />
-                <Route path="/login" component={LoginContainer} />
-                <Route path="/logout" component={LogoutContainer}/>
+               <React.Fragment>
+                <AutheticatedRoute exact path="/" authenticated = {this.state.authenticate} setJwt = {this.setJwt} render={() => <HelloWorld name="bob" />} />
+                <AutheticatedRoute path="/hello/:name" component={HelloFromParams} authenticated = {this.state.authenticate} setJwt = {this.setJwt}/>
+                <AutheticatedRoute path="/todo" component={TodoAppContainer} authenticated = {this.state.authenticate} setJwt = {this.setJwt}/>
+                <AutheticatedRoute path="/messages" component={MessagesContainer} authenticated = {this.state.authenticate} setJwt = {this.setJwt}/>
+                <AutheticatedRoute path="/message/:id" component={MessageContainer} authenticated = {this.state.authenticate} setJwt = {this.setJwt}/>
+                <AutheticatedRoute path="/login" component={LoginContainer} authenticated = {this.state.authenticate} setJwt = {this.setJwt}/>
+              </React.Fragment>
               </Col>
               <Col xs={2} />
             </Row>
