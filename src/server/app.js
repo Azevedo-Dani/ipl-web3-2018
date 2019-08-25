@@ -12,6 +12,7 @@ const db = require('./modules/db.js');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const messageRouter = require('./routes/messages')
 
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
@@ -57,6 +58,7 @@ app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/messages', messageRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

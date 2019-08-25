@@ -5,7 +5,8 @@ import Navigation from "./navigation/navigation";
 import HelloWorld from "./hello_world/hello_world";
 import HelloFromParams from "./hello_world/hello_from_params";
 import TodoAppContainer from "./todo_app/todo_app_container";
-import MessagesContainer from './message/messages_container'
+import MessagesContainer from './messages/messages_container'
+import MessageContainer from './message/message_container'
 class Main extends React.Component {
   constructor(props){
     super(props);
@@ -48,6 +49,7 @@ class Main extends React.Component {
                 <Route path="/hello/:name" component={HelloFromParams} />
                 <Route path="/todo" component={TodoAppContainer} />
                 <Route path="/messages" component={MessagesContainer}/>
+                <Route path="/message/:id" component={MessageContainer}/>
               </Col>
               <Col xs={2} />
             </Row>

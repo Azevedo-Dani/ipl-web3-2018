@@ -1,12 +1,10 @@
 import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup';
-
 const MessageComponent = ({
-    text
+    message
 }) => {
-    return <ListGroup.Item>
-        {text}
-        </ListGroup.Item>;
+    return (
+            <p>{message}</p>
+    )
 }
 
 export default MessageComponent
