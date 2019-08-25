@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 import SearchForm from './search_form';
 
@@ -15,6 +15,7 @@ const Navigation = () => {
           <Nav.Link as={Link} to="/todo" >Todo</Nav.Link>
           <Nav.Link as={Link} to="/messages" >Messages</Nav.Link>
           <Nav.Link as={Link} to="/login" >Login</Nav.Link>
+          <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
         </Nav>
        <SearchForm />
       </Navbar>

@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoItem from './todo_item';
-import ListGroup from 'react-bootstrap/lib/ListGroup';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 

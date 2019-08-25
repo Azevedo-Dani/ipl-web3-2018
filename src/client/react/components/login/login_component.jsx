@@ -20,7 +20,7 @@ const LoginComponent = ({
         <Container>
         <Row>
           <Col xs={{span: 8, offset: 2}} style={{marginTop: "200px"}}>
-          <Form onSubmit={authenticate}>
+          <Form onSubmit={authenticate} method="post">
             <Form.Group as={Row} controlId="formHorizontalEmail">
                 <Form.Label column sm={2}>
                 Email
@@ -41,7 +41,7 @@ const LoginComponent = ({
 
             <Form.Group as={Row}>
                 <Col sm={{ span: 10, offset: 2 }}>
-                <Button type="submit">Sign in</Button>
+                <Button onClick={authenticate}>Sign in</Button>
                 </Col>
             </Form.Group>
             </Form>

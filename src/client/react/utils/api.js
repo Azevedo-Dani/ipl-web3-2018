@@ -6,7 +6,7 @@ function sendApiRequest({
     const jwt = localStorage.getItem('JWT');
     const headers = new Headers()
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', jwt);
+    headers.append('Authorization', JSON.parse(jwt));
 
     return fetch(
         url,
@@ -19,8 +19,17 @@ function sendApiRequest({
 
 }
 
+ function handleResponse(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response.json();
+ }
 
 
 
 
-export default sendApiRequest
+
+
+exports.handleResponse = handleResponse
+exports.sendApiRequest = sendApiRequest

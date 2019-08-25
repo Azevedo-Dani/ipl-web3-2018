@@ -9,16 +9,37 @@ const sassMiddleware = require('node-sass-middleware');
 const assetPath = require('./asset_path.js');
 
 const db = require('./modules/db.js');
-
+const jwtWebToken = require('jsonwebtoken')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login')
 const messagesRouter = require('./routes/messages');
 
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
 
 const app = express();
-
+const autoMiddleware = (req, res, next) => {
+  const token = req.get('Authorization')
+  if (token) {
+    console.log(token)
+    jwtWebToken.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send('Bad token')
+        return
+      }
+      if (decoded.exp < Date.now()) {
+        res.status(401).send('Token expired')
+        return
+      }
+      console.log('ok')
+      next()
+    })
+  } else {
+    res.status(401).send('Token mandatory')
+    return 
+  }
+}
 // Connect to DB, and insert default user if necessary
 db.connect().then((db) => {
   let collection = db.collection('users');
@@ -57,9 +78,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.use('/', indexRouter);
+app.use('/api/login', loginRouter)
+app.use(autoMiddleware)
 app.use('/api/users', usersRouter);
 app.use('/api/messages', messagesRouter);
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
